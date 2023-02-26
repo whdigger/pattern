@@ -13,3 +13,7 @@ creational.abstractFactory:
 creational.builder:
     path: creational/builder
     controller: App\Controller\Creational::builder
+
+creational.prototype:
+    path: creational/prototype
+    controller: App\Controller\Creational::prototype
