@@ -9,3 +9,7 @@ creational.methodFactory:
 creational.abstractFactory:
     path: creational/abstractFactory
     controller: App\Controller\Creational::abstractFactory
+
+creational.builder:
+    path: creational/builder
+    controller: App\Controller\Creational::builder
