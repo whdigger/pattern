@@ -1,0 +1,11 @@
+index:
+    path: /
+    controller: App\Controller\Main::index
+
+creational.methodFactory:
+    path: creational/methodFactory
+    controller: App\Controller\Creational::methodFactory
+
+creational.abstractFactory:
+    path: creational/abstractFactory
+    controller: App\Controller\Creational::abstractFactory
