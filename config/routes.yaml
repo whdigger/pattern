@@ -17,3 +17,7 @@ creational.builder:
 creational.prototype:
     path: creational/prototype
     controller: App\Controller\Creational::prototype
+
+creational.singleton:
+    path: creational/singleton
+    controller: App\Controller\Creational::singleton
