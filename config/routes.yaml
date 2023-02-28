@@ -21,3 +21,7 @@ creational.prototype:
 creational.singleton:
     path: creational/singleton
     controller: App\Controller\Creational::singleton
+
+structural.singleton:
+    path: structural/adapter
+    controller: App\Controller\Structural::adapter
