@@ -22,6 +22,10 @@ creational.singleton:
     path: creational/singleton
     controller: App\Controller\Creational::singleton
 
-structural.singleton:
+structural.adapter:
     path: structural/adapter
     controller: App\Controller\Structural::adapter
+
+structural.most:
+    path: structural/most
+    controller: App\Controller\Structural::most
