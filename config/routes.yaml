@@ -33,3 +33,7 @@ structural.most:
 structural.composite:
     path: structural/composite
     controller: App\Controller\Structural::composite
+
+structural.decorator:
+    path: structural/decorator
+    controller: App\Controller\Structural::decorator
