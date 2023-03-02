@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Pattern\Structural\Adapter\Library\SlackApi;
 use App\Pattern\Structural\Adapter\SlackNotificationAdapter;
+use App\Pattern\Structural\Composite\Composite;
 use App\Pattern\Structural\Most\Abstraction\ProductPage;
 use App\Pattern\Structural\Most\Abstraction\SimplePage;
 use App\Pattern\Structural\Most\Implement\HTMLRenderer;
@@ -62,5 +63,15 @@ class Structural
         $output .= $page->view();
 
         return new Response($output, Response::HTTP_OK, ['content-type' => 'text/html']);
+    }
+
+    public function composite()
+    {
+        $composite = new Composite();
+
+        $form = $composite->getProductForm();
+        $composite->loadProductData($form);
+
+        return new Response($composite->renderProduct($form), Response::HTTP_OK, ['content-type' => 'text/plain']);
     }
 }

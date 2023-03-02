@@ -29,3 +29,7 @@ structural.adapter:
 structural.most:
     path: structural/most
     controller: App\Controller\Structural::most
+
+structural.composite:
+    path: structural/composite
+    controller: App\Controller\Structural::composite
