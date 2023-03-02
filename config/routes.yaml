@@ -37,3 +37,7 @@ structural.composite:
 structural.decorator:
     path: structural/decorator
     controller: App\Controller\Structural::decorator
+
+structural.fasad:
+    path: structural/fasad
+    controller: App\Controller\Structural::fasad

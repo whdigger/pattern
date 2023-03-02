@@ -10,6 +10,7 @@ use App\Pattern\Structural\Decorator\DangerousHTMLTagsFilter;
 use App\Pattern\Structural\Decorator\Decorator;
 use App\Pattern\Structural\Decorator\MarkdownFormat;
 use App\Pattern\Structural\Decorator\PlainTextFilter;
+use App\Pattern\Structural\Fasad\Authorizator;
 use App\Pattern\Structural\Most\Abstraction\ProductPage;
 use App\Pattern\Structural\Most\Abstraction\SimplePage;
 use App\Pattern\Structural\Most\Implement\HTMLRenderer;
@@ -151,5 +152,22 @@ HERE;
         $outputString .= "\n\n\n";
 
         return new Response($outputString, Response::HTTP_OK, ['content-type' => 'text/plain']);
+    }
+
+    public function fasad()
+    {
+        // Вымышленный пользователь
+        $username = "Vasya";
+        $passwd = "qwerty";
+
+        $error = '';
+        try {
+            $auth = new Authorizator();
+            $auth->authorizate($username, $passwd);
+        } catch (\Exception $e) {
+            $error = $e->getMessage();
+        }
+
+        return new Response($error, Response::HTTP_OK, ['content-type' => 'text/plain']);
     }
 }
