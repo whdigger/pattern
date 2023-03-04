@@ -45,3 +45,7 @@ structural.fasad:
 structural.flyweight:
     path: structural/flyweight
     controller: App\Controller\Structural::flyweight
+
+structural.proxy:
+    path: structural/proxy
+    controller: App\Controller\Structural::proxy

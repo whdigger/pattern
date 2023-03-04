@@ -17,6 +17,9 @@ use App\Pattern\Structural\Most\Abstraction\SimplePage;
 use App\Pattern\Structural\Most\Implement\HTMLRenderer;
 use App\Pattern\Structural\Most\Implement\JsonRenderer;
 use App\Pattern\Structural\Most\Product;
+use App\Pattern\Structural\Proxy\CachingDownloader;
+use App\Pattern\Structural\Proxy\Proxy;
+use App\Pattern\Structural\Proxy\SimpleDownloader;
 use Symfony\Component\HttpFoundation\Response;
 
 class Structural
@@ -192,6 +195,19 @@ HERE;
         if ($cat) {
             $cat->render();
         }
+
+        return new Response(ob_get_clean(), Response::HTTP_OK, ['content-type' => 'text/plain']);
+    }
+
+    public function proxy()
+    {
+        ob_start();
+        $proxy = new Proxy();
+        $simpleDownloader = new SimpleDownloader();
+
+        echo "Executing the same client code with a proxy:\n";
+        $cachingDownloader = new CachingDownloader($simpleDownloader);
+        $proxy->download($cachingDownloader);
 
         return new Response(ob_get_clean(), Response::HTTP_OK, ['content-type' => 'text/plain']);
     }
