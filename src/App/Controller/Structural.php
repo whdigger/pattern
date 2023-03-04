@@ -11,6 +11,7 @@ use App\Pattern\Structural\Decorator\Decorator;
 use App\Pattern\Structural\Decorator\MarkdownFormat;
 use App\Pattern\Structural\Decorator\PlainTextFilter;
 use App\Pattern\Structural\Fasad\Authorizator;
+use App\Pattern\Structural\Flyweight\CatDataBase;
 use App\Pattern\Structural\Most\Abstraction\ProductPage;
 use App\Pattern\Structural\Most\Abstraction\SimplePage;
 use App\Pattern\Structural\Most\Implement\HTMLRenderer;
@@ -169,5 +170,29 @@ HERE;
         }
 
         return new Response($error, Response::HTTP_OK, ['content-type' => 'text/plain']);
+    }
+
+    public function flyweight()
+    {
+        ob_start();
+        /**
+         * Клиентский код.
+         */
+        $db = new CatDataBase();
+        $db->addCat('Siri',5,'Pete','Leopard','image.jpg','black','spotted','glossy',52);
+
+        echo "\nClient: Let's look for a cat named \"Siri\".\n";
+        $cat = $db->findCat(['name' => "Siri"]);
+        if ($cat) {
+            $cat->render();
+        }
+
+        echo "\nClient: Let's look for a cat named \"Bob\".\n";
+        $cat = $db->findCat(['name' => "Bob"]);
+        if ($cat) {
+            $cat->render();
+        }
+
+        return new Response(ob_get_clean(), Response::HTTP_OK, ['content-type' => 'text/plain']);
     }
 }

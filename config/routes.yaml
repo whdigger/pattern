@@ -41,3 +41,7 @@ structural.decorator:
 structural.fasad:
     path: structural/fasad
     controller: App\Controller\Structural::fasad
+
+structural.flyweight:
+    path: structural/flyweight
+    controller: App\Controller\Structural::flyweight
