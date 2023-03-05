@@ -53,6 +53,11 @@ structural.proxy:
     controller: App\Controller\Structural::proxy
 
 
+
 behavioral.cor:
     path: behavioral/cor
     controller: App\Controller\Behavioral::cor
+
+behavioral.command:
+    path: behavioral/command
+    controller: App\Controller\Behavioral::command

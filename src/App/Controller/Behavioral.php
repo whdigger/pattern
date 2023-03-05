@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Pattern\Behavioral\Command\IMDBGenresScrapingCommand;
+use App\Pattern\Behavioral\Command\Queue;
 use App\Pattern\Behavioral\Cor\Middleware\RoleCheckMiddleware;
 use App\Pattern\Behavioral\Cor\Middleware\Server;
 use App\Pattern\Behavioral\Cor\Middleware\ThrottlingMiddleware;
@@ -34,6 +36,19 @@ class Behavioral
         $password = 'admin_pass';
         $server->logIn($email, $password);
 
+        return new Response(ob_get_clean(), Response::HTTP_OK, ['content-type' => 'text/plain']);
+    }
+
+    public function command()
+    {
+        ob_start();
+        $queue = Queue::get();
+
+        if ($queue->isEmpty()) {
+            $queue->add(new IMDBGenresScrapingCommand());
+        }
+
+        $queue->work();
         return new Response(ob_get_clean(), Response::HTTP_OK, ['content-type' => 'text/plain']);
     }
 }
