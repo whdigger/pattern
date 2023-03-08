@@ -61,3 +61,7 @@ behavioral.cor:
 behavioral.command:
     path: behavioral/command
     controller: App\Controller\Behavioral::command
+
+behavioral.iterator:
+    path: behavioral/iterator
+    controller: App\Controller\Behavioral::iterator

@@ -8,6 +8,7 @@ use App\Pattern\Behavioral\Cor\Middleware\RoleCheckMiddleware;
 use App\Pattern\Behavioral\Cor\Middleware\Server;
 use App\Pattern\Behavioral\Cor\Middleware\ThrottlingMiddleware;
 use App\Pattern\Behavioral\Cor\Middleware\UserExistsMiddleware;
+use App\Pattern\Behavioral\Iterator\CsvIterator;
 use Symfony\Component\HttpFoundation\Response;
 
 class Behavioral
@@ -50,5 +51,15 @@ class Behavioral
 
         $queue->work();
         return new Response(ob_get_clean(), Response::HTTP_OK, ['content-type' => 'text/plain']);
+    }
+
+    public function iterator()
+    {
+        $csv = new CsvIterator(__DIR__ . '/../Pattern/Behavioral/Iterator/Resource/cats.csv');
+        $output = [];
+        foreach ($csv as $elm) {
+            $output[] = $elm;
+        }
+        return new Response(print_r($output,true), Response::HTTP_OK, ['content-type' => 'text/plain']);
     }
 }
