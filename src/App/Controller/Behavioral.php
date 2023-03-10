@@ -13,6 +13,8 @@ use App\Pattern\Behavioral\Mediator\Component\Logger;
 use App\Pattern\Behavioral\Mediator\Component\OnboardingNotification;
 use App\Pattern\Behavioral\Mediator\Component\UserRepository;
 use App\Pattern\Behavioral\Mediator\EventDispatcher;
+use App\Pattern\Behavioral\Memento\Command;
+use App\Pattern\Behavioral\Memento\Editor;
 use Symfony\Component\HttpFoundation\Response;
 
 class Behavioral
@@ -85,6 +87,18 @@ class Behavioral
             'email' => 'john99@example.com',
         ]);
         $user->delete();
+
+        return new Response(ob_get_clean(), Response::HTTP_OK, ['content-type' => 'text/plain']);
+    }
+
+    public function memento()
+    {
+        ob_start();
+        $editor = new Editor('Text', 'curX', 'curY', 'selectWidth');
+        $command = new Command($editor);
+        $command->makeBackup();
+        $command->makeBackup();
+        $command->undo();
 
         return new Response(ob_get_clean(), Response::HTTP_OK, ['content-type' => 'text/plain']);
     }

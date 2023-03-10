@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Pattern\Behavioral\Mediator;
-use App\Pattern\Behavioral\Mediator\Component\Observer;
 
+use App\Pattern\Behavioral\Mediator\Component\Observer;
 /**
  * Класс Диспетчера Событий выполняет функции Посредника и содержит логику
  * подписки и уведомлений. Хотя классический Посредник часто зависит от

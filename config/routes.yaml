@@ -69,3 +69,7 @@ behavioral.iterator:
 behavioral.mediator:
     path: behavioral/mediator
     controller: App\Controller\Behavioral::mediator
+
+behavioral.memento:
+    path: behavioral/memento
+    controller: App\Controller\Behavioral::memento
