@@ -65,3 +65,7 @@ behavioral.command:
 behavioral.iterator:
     path: behavioral/iterator
     controller: App\Controller\Behavioral::iterator
+
+behavioral.mediator:
+    path: behavioral/mediator
+    controller: App\Controller\Behavioral::mediator

@@ -9,6 +9,10 @@ use App\Pattern\Behavioral\Cor\Middleware\Server;
 use App\Pattern\Behavioral\Cor\Middleware\ThrottlingMiddleware;
 use App\Pattern\Behavioral\Cor\Middleware\UserExistsMiddleware;
 use App\Pattern\Behavioral\Iterator\CsvIterator;
+use App\Pattern\Behavioral\Mediator\Component\Logger;
+use App\Pattern\Behavioral\Mediator\Component\OnboardingNotification;
+use App\Pattern\Behavioral\Mediator\Component\UserRepository;
+use App\Pattern\Behavioral\Mediator\EventDispatcher;
 use Symfony\Component\HttpFoundation\Response;
 
 class Behavioral
@@ -60,6 +64,28 @@ class Behavioral
         foreach ($csv as $elm) {
             $output[] = $elm;
         }
-        return new Response(print_r($output,true), Response::HTTP_OK, ['content-type' => 'text/plain']);
+        return new Response(print_r($output, true), Response::HTTP_OK, ['content-type' => 'text/plain']);
+    }
+
+    public function mediator()
+    {
+        ob_start();
+
+        $repository = new UserRepository();
+        $logger = new Logger;
+        $onboarding = new OnboardingNotification('1@example.com');
+
+        EventDispatcher::get()->attach($repository, 'facebook:update');
+        EventDispatcher::get()->attach($logger);
+        EventDispatcher::get()->attach($onboarding, 'users:created');
+
+        $repository->initialize(__DIR__ . 'users.csv');
+        $user = $repository->createUser([
+            'name' => 'John Smith',
+            'email' => 'john99@example.com',
+        ]);
+        $user->delete();
+
+        return new Response(ob_get_clean(), Response::HTTP_OK, ['content-type' => 'text/plain']);
     }
 }
