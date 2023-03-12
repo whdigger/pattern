@@ -15,6 +15,8 @@ use App\Pattern\Behavioral\Mediator\Component\UserRepository;
 use App\Pattern\Behavioral\Mediator\EventDispatcher;
 use App\Pattern\Behavioral\Memento\Command;
 use App\Pattern\Behavioral\Memento\Editor;
+use App\Pattern\Behavioral\Observer\Account;
+use App\Pattern\Behavioral\Observer\AccountObserver;
 use Symfony\Component\HttpFoundation\Response;
 
 class Behavioral
@@ -99,6 +101,17 @@ class Behavioral
         $command->makeBackup();
         $command->makeBackup();
         $command->undo();
+
+        return new Response(ob_get_clean(), Response::HTTP_OK, ['content-type' => 'text/plain']);
+    }
+
+    public function observer()
+    {
+        ob_start();
+        $accountObserver = new AccountObserver();
+        $account = new Account();
+        $account->attach($accountObserver);
+        $account->changeEmail('foo@bar.com');
 
         return new Response(ob_get_clean(), Response::HTTP_OK, ['content-type' => 'text/plain']);
     }

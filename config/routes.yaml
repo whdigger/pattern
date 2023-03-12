@@ -73,3 +73,7 @@ behavioral.mediator:
 behavioral.memento:
     path: behavioral/memento
     controller: App\Controller\Behavioral::memento
+
+behavioral.observer:
+    path: behavioral/observer
+    controller: App\Controller\Behavioral::observer
