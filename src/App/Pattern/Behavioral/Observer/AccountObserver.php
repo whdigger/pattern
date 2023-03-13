@@ -17,6 +17,7 @@ class AccountObserver implements SplObserver
      */
     public function update(SplSubject $subject): void
     {
+        echo "Update AccountObserver\n";
         $this->changedUsers[] = clone $subject;
     }
 
