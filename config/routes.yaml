@@ -77,3 +77,7 @@ behavioral.memento:
 behavioral.observer:
     path: behavioral/observer
     controller: App\Controller\Behavioral::observer
+
+behavioral.state:
+    path: behavioral/state
+    controller: App\Controller\Behavioral::state

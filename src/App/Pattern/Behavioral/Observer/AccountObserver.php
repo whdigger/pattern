@@ -2,7 +2,6 @@
 
 namespace App\Pattern\Behavioral\Observer;
 
-
 use SplObserver;
 use SplSubject;
 class AccountObserver implements SplObserver

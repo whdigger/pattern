@@ -17,6 +17,7 @@ use App\Pattern\Behavioral\Memento\Command;
 use App\Pattern\Behavioral\Memento\Editor;
 use App\Pattern\Behavioral\Observer\Account;
 use App\Pattern\Behavioral\Observer\AccountObserver;
+use App\Pattern\Behavioral\State\OrderContext;
 use Symfony\Component\HttpFoundation\Response;
 
 class Behavioral
@@ -114,5 +115,20 @@ class Behavioral
         $account->changeEmail('foo@bar.com');
 
         return new Response(ob_get_clean(), Response::HTTP_OK, ['content-type' => 'text/plain']);
+    }
+
+    public function state()
+    {
+        $state = [];
+        $orderContext = OrderContext::create();
+        $state[] = $orderContext->toString();
+
+        $orderContext->proceedToNext();
+        $state[] = $orderContext->toString();
+
+        $orderContext->proceedToNext();
+        $state[] = $orderContext->toString();
+
+        return new Response(implode("\n",$state), Response::HTTP_OK, ['content-type' => 'text/plain']);
     }
 }
