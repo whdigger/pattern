@@ -81,3 +81,7 @@ behavioral.observer:
 behavioral.state:
     path: behavioral/state
     controller: App\Controller\Behavioral::state
+
+behavioral.strategy:
+    path: behavioral/strategy
+    controller: App\Controller\Behavioral::strategy

@@ -18,6 +18,8 @@ use App\Pattern\Behavioral\Memento\Editor;
 use App\Pattern\Behavioral\Observer\Account;
 use App\Pattern\Behavioral\Observer\AccountObserver;
 use App\Pattern\Behavioral\State\OrderContext;
+use App\Pattern\Behavioral\Strategy\CompareContext;
+use App\Pattern\Behavioral\Strategy\IdComparator;
 use Symfony\Component\HttpFoundation\Response;
 
 class Behavioral
@@ -130,5 +132,13 @@ class Behavioral
         $state[] = $orderContext->toString();
 
         return new Response(implode("\n",$state), Response::HTTP_OK, ['content-type' => 'text/plain']);
+    }
+
+    public function strategy()
+    {
+        $compareContext = new CompareContext(new IdComparator());
+        $elements = $compareContext->executeStrategy([['id' => 2], ['id' => 1], ['id' => 3]]);
+
+        return new Response(implode("\n", $elements), Response::HTTP_OK, ['content-type' => 'text/plain']);
     }
 }
