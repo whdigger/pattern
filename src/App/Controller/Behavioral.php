@@ -20,6 +20,7 @@ use App\Pattern\Behavioral\Observer\AccountObserver;
 use App\Pattern\Behavioral\State\OrderContext;
 use App\Pattern\Behavioral\Strategy\CompareContext;
 use App\Pattern\Behavioral\Strategy\IdComparator;
+use App\Pattern\Behavioral\TemplateMethod\Facebook;
 use Symfony\Component\HttpFoundation\Response;
 
 class Behavioral
@@ -131,7 +132,7 @@ class Behavioral
         $orderContext->proceedToNext();
         $state[] = $orderContext->toString();
 
-        return new Response(implode("\n",$state), Response::HTTP_OK, ['content-type' => 'text/plain']);
+        return new Response(implode("\n", $state), Response::HTTP_OK, ['content-type' => 'text/plain']);
     }
 
     public function strategy()
@@ -140,5 +141,16 @@ class Behavioral
         $elements = $compareContext->executeStrategy([['id' => 2], ['id' => 1], ['id' => 3]]);
 
         return new Response(implode("\n", $elements), Response::HTTP_OK, ['content-type' => 'text/plain']);
+    }
+
+    public function templateMethod()
+    {
+        ob_start();
+
+        $message = 'Hello';
+        $network = new Facebook('username@test.ru', '1234');
+        $network->post($message);
+
+        return new Response(ob_get_clean(), Response::HTTP_OK, ['content-type' => 'text/plain']);
     }
 }

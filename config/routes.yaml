@@ -85,3 +85,7 @@ behavioral.state:
 behavioral.strategy:
     path: behavioral/strategy
     controller: App\Controller\Behavioral::strategy
+
+behavioral.templateMethod:
+    path: behavioral/template-method
+    controller: App\Controller\Behavioral::templateMethod
