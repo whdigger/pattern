@@ -89,3 +89,7 @@ behavioral.strategy:
 behavioral.templateMethod:
     path: behavioral/template-method
     controller: App\Controller\Behavioral::templateMethod
+
+behavioral.visitor:
+    path: behavioral/visitor
+    controller: App\Controller\Behavioral::visitor
